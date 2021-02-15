@@ -20,12 +20,10 @@ public class LocoService {
     OrderCalculator orderCalculator;
     
     public TacoOrder saveOrder(TacoOrderRequest tacoOrderRequest) {
-        TacoOrder tacoOrderToSave = new TacoOrder();
-        tacoOrderToSave.setCustomerId(tacoOrderRequest.getCustomerId());
+        TacoOrder orderWithTotal = orderCalculator.calculateTacoOrderTotal(tacoOrderRequest);
+        orderWithTotal.setCustomerId(tacoOrderRequest.getCustomerId());
 
-        // TODO: make calculator to calculate order total 
-
-        TacoOrder savedOrder = this.tacoOrderRepository.save(tacoOrderToSave);
+        TacoOrder savedOrder = this.tacoOrderRepository.save(orderWithTotal);
 
         return savedOrder;
     }

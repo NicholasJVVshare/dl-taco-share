@@ -31,7 +31,7 @@ public class OrderCalculator {
         }
         
         newTacoOrder.setOrderTotal(runningTotal);
-        System.out.println(newTacoOrder.toString());
+        newTacoOrder.setCustomerId(tacoOrderRequest.getCustomerId());
 
         return newTacoOrder;
     }

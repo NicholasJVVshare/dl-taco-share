@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity(name = "TACO_ORDER")
+@NoArgsConstructor
 public class TacoOrder {
 
     @Id
