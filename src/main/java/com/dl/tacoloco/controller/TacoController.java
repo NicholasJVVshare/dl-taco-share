@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import com.dl.tacoloco.dto.*;
+import com.dl.tacoloco.entity.TacoOrder;
 import com.dl.tacoloco.service.LocoService;
 
 @Component
@@ -23,14 +23,16 @@ class TacoController {
     LocoService locoService;
 
     @PostMapping(value="/total")
-    public ResponseEntity<TacoOrderResponse> calculateOrderTotalPrice(@RequestBody TacoOrderRequest tacoOrder) {
-        System.out.println(tacoOrder.getTacos().toString());
+    public ResponseEntity<TacoOrderResponse> calculateOrderTotalPrice(@RequestBody TacoOrderRequest tacoOrderRequest) {
+        System.out.println(tacoOrderRequest.getTacos().toString());
         BigDecimal total = new BigDecimal("20.50");
+
+        TacoOrder tacoOrder = locoService.saveOrder(tacoOrderRequest);
 
         TacoOrderResponse orderTotalResponse = new TacoOrderResponse();
         orderTotalResponse.setTotal(total);
-        orderTotalResponse.setCustomerId(tacoOrder.getCustomerId());
-        orderTotalResponse.setOrderId(UUID.randomUUID().toString());
+        orderTotalResponse.setCustomerId(tacoOrderRequest.getCustomerId());
+        orderTotalResponse.setOrderId(tacoOrder.getOrderId().toString());
 
         return new ResponseEntity<>(orderTotalResponse, HttpStatus.OK);
     }

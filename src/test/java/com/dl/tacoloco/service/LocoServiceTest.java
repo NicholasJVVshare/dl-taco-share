@@ -11,12 +11,10 @@ import com.dl.tacoloco.dto.TacoOrderRequest;
 import com.dl.tacoloco.entity.TacoOrder;
 import com.dl.tacoloco.repo.TacoOrderRepository;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -26,7 +24,6 @@ public class LocoServiceTest {
     LocoService locoService;
 
     @Mock
-
     TacoOrderRepository mockTacoOrderRepo;
     
     @Test
@@ -35,7 +32,6 @@ public class LocoServiceTest {
 		assertEquals("Taco service is loco.", locoService.serviceCheck());
 	}
 
-    // @Disabled // Intentionally failing TDD-style, skipped for now to confirm build works
     @Test
     public void savesOrderToTacoRepoWithCorrectIds(){
         ArgumentCaptor<TacoOrder> tacoOrderCaptor = ArgumentCaptor.forClass(TacoOrder.class);
