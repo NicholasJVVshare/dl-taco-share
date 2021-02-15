@@ -1,7 +1,8 @@
 package com.dl.tacoloco.service;
 
 import static org.junit.jupiter.api.Assertions.*;
-// import org.skyscreamer.jsonassert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.UUID;
@@ -12,16 +13,20 @@ import com.dl.tacoloco.repo.TacoOrderRepository;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class LocoServiceTest {
 
-    @Autowired
+    @InjectMocks
     LocoService locoService;
+
     @Mock
+
     TacoOrderRepository mockTacoOrderRepo;
     
     @Test
@@ -30,22 +35,27 @@ public class LocoServiceTest {
 		assertEquals("Taco service is loco.", locoService.serviceCheck());
 	}
 
-    @Disabled // Intentionally failing TDD-style, skipped for now to confirm build works
+    // @Disabled // Intentionally failing TDD-style, skipped for now to confirm build works
     @Test
-    public void savesOrderToTacoRepo(){
-        String mockOrderId = "Mock orderId 1";
-        String customerId = "El Rey de los Tacos";
+    public void savesOrderToTacoRepoWithCorrectIds(){
+        ArgumentCaptor<TacoOrder> tacoOrderCaptor = ArgumentCaptor.forClass(TacoOrder.class);
+
+        String mockCustomerId = "El Rey de los Tacos";
         TacoOrderRequest mockTacoOrderRequest = new TacoOrderRequest();
-        mockTacoOrderRequest.setCustomerId(customerId);
-        TacoOrder mockTacoOrder = new TacoOrder();
-        TacoOrder mockSavedTacoOrder = new TacoOrder();
-        mockSavedTacoOrder.setOrderId(UUID.fromString(mockOrderId));
-        
-        when(mockTacoOrderRepo.save(mockTacoOrder)).thenReturn(mockSavedTacoOrder);
+        mockTacoOrderRequest.setCustomerId(mockCustomerId);
+
+        String mockOrderId = UUID.randomUUID().toString();
+        TacoOrder savedTacoOrder = new TacoOrder();
+        savedTacoOrder.setCustomerId(mockCustomerId);
+        savedTacoOrder.setOrderId(UUID.fromString(mockOrderId));
+
+        when(mockTacoOrderRepo.save(any(TacoOrder.class))).thenReturn(savedTacoOrder);
 
         TacoOrder actualTacoOrder = locoService.saveOrder(mockTacoOrderRequest);
 
-        assertEquals(mockOrderId, actualTacoOrder.getOrderId());
+        verify(mockTacoOrderRepo).save(tacoOrderCaptor.capture());
+        assertEquals(tacoOrderCaptor.getValue().getCustomerId(), actualTacoOrder.getCustomerId());
+        assertEquals(savedTacoOrder.getOrderId().toString(), actualTacoOrder.getOrderId().toString());
     }
 
 }

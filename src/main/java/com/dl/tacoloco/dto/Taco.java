@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-class Taco {
+public class Taco {
     
     String type;
     Integer count;

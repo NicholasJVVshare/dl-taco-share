@@ -16,11 +16,14 @@ public class LocoService {
     TacoOrderRepository tacoOrderRepository;
     
     public TacoOrder saveOrder(TacoOrderRequest tacoOrderRequest) {
-        TacoOrder tacoOrder2 = new TacoOrder();
+        TacoOrder tacoOrderToSave = new TacoOrder();
+        tacoOrderToSave.setCustomerId(tacoOrderRequest.getCustomerId());
 
-        // TODO: complete save logic according to failing test
+        // TODO: make calculator to calculate order total 
 
-        return tacoOrder2;
+        TacoOrder savedOrder = this.tacoOrderRepository.save(tacoOrderToSave);
+
+        return savedOrder;
     }
 
     public String serviceCheck() {

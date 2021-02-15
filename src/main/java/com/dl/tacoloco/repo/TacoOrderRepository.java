@@ -1,5 +1,7 @@
 package com.dl.tacoloco.repo;
 
+import java.util.UUID;
+
 import com.dl.tacoloco.entity.TacoOrder;
 
 import org.springframework.data.repository.CrudRepository;
@@ -8,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Component
-public interface TacoOrderRepository extends CrudRepository<TacoOrder, String> {
+public interface TacoOrderRepository extends CrudRepository<TacoOrder, UUID> {
     // public TacoOrder save(TacoOrder tacoOrderRequest);
 }
