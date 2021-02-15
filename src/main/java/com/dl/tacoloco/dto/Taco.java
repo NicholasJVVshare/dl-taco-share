@@ -10,6 +10,7 @@ import lombok.Data;
 class Taco {
     
     String type;
+    Integer count;
     BigDecimal price;
 
 }

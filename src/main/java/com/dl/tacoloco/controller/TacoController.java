@@ -22,10 +22,11 @@ class TacoController {
     LocoService locoService;
 
     @PostMapping(value="/total")
-    public ResponseEntity<OrderTotal> calculateOrderTotalPrice(@RequestBody TacoOrder tacoOrder) {
+    public ResponseEntity<OrderTotal> calculateOrderTotalPrice(@RequestBody TacoOrderRequest tacoOrder) {
         System.out.println(tacoOrder);
-        BigDecimal amount = new BigDecimal("20");
-        OrderTotal orderTotal = new OrderTotal(amount);
+        BigDecimal total = new BigDecimal("20.50");
+        OrderTotal orderTotal = new OrderTotal();
+        orderTotal.setTotal(total);
         new ResponseEntity<>(orderTotal, HttpStatus.OK);
 
         return new ResponseEntity<>(orderTotal, HttpStatus.OK);
