@@ -3,6 +3,7 @@ package com.dl.tacoloco.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,12 +24,12 @@ public class OrderCalculatorTest {
 
     private final String MOCK_CUSTOMER_ID = "MockCustyId";
 
-    @Disabled // Intentionally failing TDD-style, skipped for now to confirm build works
+    // @Disabled // TDD-style
     @Test
     public void orderCalculatorReturnsCorrectTotal() {
         TacoOrderRequest tacoOrderRequest = this.buildTacoOrderRequest();
 
-        BigDecimal expectedOrderTotal = new BigDecimal(18);
+        BigDecimal expectedOrderTotal = new BigDecimal("18.00");
 
         TacoOrder actualTacoOrder = orderCalculator.calculateTacoOrderTotal(tacoOrderRequest);
         
@@ -38,10 +39,10 @@ public class OrderCalculatorTest {
     private TacoOrderRequest buildTacoOrderRequest(){
         TacoOrderRequest tacoOrderRequest = new TacoOrderRequest();
         List<Taco> tacos = Arrays.asList(
-            Taco.builder().type("veggie").count(2).price(new BigDecimal(2.5)).build(),
-            Taco.builder().type("chicken").count(1).price(new BigDecimal(3)).build(),
-            Taco.builder().type("beef").count(1).price(new BigDecimal(3)).build(),
-            Taco.builder().type("chorizo").count(2).price(new BigDecimal(3.5)).build()
+            new Taco("veggie", 2, new BigDecimal(2.5)),
+            new Taco("chicken", 1, new BigDecimal(3)),
+            new Taco("veggie", 1, new BigDecimal(3)),
+            new Taco("chorizo", 2, new BigDecimal(3.5))
         );
         tacoOrderRequest.setTacos(tacos);
         tacoOrderRequest.setCustomerId(MOCK_CUSTOMER_ID);

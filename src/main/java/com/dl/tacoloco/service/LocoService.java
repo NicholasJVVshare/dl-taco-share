@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.dl.tacoloco.dto.*;
 import com.dl.tacoloco.entity.TacoOrder;
 import com.dl.tacoloco.repo.TacoOrderRepository;
+import com.dl.tacoloco.util.OrderCalculator;
 
 @Service
 @Component
@@ -14,6 +15,9 @@ public class LocoService {
 
     @Autowired
     TacoOrderRepository tacoOrderRepository;
+
+    @Autowired
+    OrderCalculator orderCalculator;
     
     public TacoOrder saveOrder(TacoOrderRequest tacoOrderRequest) {
         TacoOrder tacoOrderToSave = new TacoOrder();

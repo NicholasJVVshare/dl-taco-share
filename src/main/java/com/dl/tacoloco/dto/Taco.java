@@ -2,16 +2,17 @@ package com.dl.tacoloco.dto;
 
 import java.math.BigDecimal;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Taco {
     
     String type;
     Integer count;
-    // TODO: move price to constant file - should UI have to know this?
     BigDecimal price;
 
 }

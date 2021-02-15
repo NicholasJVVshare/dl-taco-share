@@ -24,4 +24,5 @@ public class TacoOrder {
 
     @Column
     BigDecimal orderTotal;
+
 }

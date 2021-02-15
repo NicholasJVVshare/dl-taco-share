@@ -10,6 +10,7 @@ import java.util.UUID;
 import com.dl.tacoloco.dto.TacoOrderRequest;
 import com.dl.tacoloco.entity.TacoOrder;
 import com.dl.tacoloco.repo.TacoOrderRepository;
+import com.dl.tacoloco.util.OrderCalculator;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -25,6 +26,9 @@ public class LocoServiceTest {
 
     @Mock
     TacoOrderRepository mockTacoOrderRepo;
+
+    @Mock
+    OrderCalculator mockOrderCalculator;
     
     @Test
 	public void serviceLoads() {
