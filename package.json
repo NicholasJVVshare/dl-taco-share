@@ -1,0 +1,22 @@
+{
+  "name": "taco-loco",
+  "version": "1.0.0",
+  "description": "Code Challenge for DL - npm is only for running newman tests. The app itself is all Java Spring Boot.",
+  "main": "N/A",
+  "scripts": {
+    "test": "./node_modules/newman/bin/newman.js run newman/Taco-Loco.postman_collection.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasJVVshare/dl-taco-share.git"
+  },
+  "author": "NJV",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicholasJVVshare/dl-taco-share/issues"
+  },
+  "homepage": "https://github.com/NicholasJVVshare/dl-taco-share#readme",
+  "dependencies": {
+    "newman": "^5.2.2"
+  }
+}

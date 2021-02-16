@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "1e61dcf6-89ba-4e1b-be97-53d68c9a49eb",
+		"name": "Taco Loco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Order Total six tacos with discount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response status successful\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"});",
+							"",
+							"pm.test(\"Order total is correct\", function () {",
+							"    pm.expect(jsonData.total).to.eql(16.40); // discount applied",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"Mr. Taco Eater\",\n    \"tacos\": [\n        {\n            \"type\": \"veggie\",\n            \"count\": 3,\n            \"price\": 2.5\n        },\n        {\n            \"type\": \"chicken\",\n            \"count\": 1,\n            \"price\": 3\n        },\n        {\n            \"type\": \"beef\",\n            \"count\": 1,\n            \"price\": 3\n        },\n        {\n            \"type\": \"chorizo\",\n            \"count\": 2,\n            \"price\": 3.5\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order/total",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Total three tacos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Response status successful\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"});",
+							"",
+							"pm.test(\"Order total is correct\", function () {",
+							"    pm.expect(jsonData.total).to.eql(8.00); // discount included",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"Mr. Taco Eater\",\n    \"tacos\": [\n        {\n            \"type\": \"veggie\",\n            \"count\": 2,\n            \"price\": 2.5\n        },\n        {\n            \"type\": \"chicken\",\n            \"count\": 1,\n            \"price\": 3\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order/total",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Empty Error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 500 for error\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});",
+							"",
+							"pm.test(\"Expected error message is present\", function () {",
+							"    pm.expect(body.message).to.equal(\"This order does not have any tacos in it.\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"Mr. Not Hungry For Tacos\",\n    \"tacos\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/order/total",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order History",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var orderList = pm.response.json();",
+							"",
+							"console.log(\"Last order:\", orderList[orderList.length - 1])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
