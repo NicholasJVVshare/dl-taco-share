@@ -23,6 +23,9 @@ public class LocoService {
         if (tacoOrderRequest.getTacos().isEmpty()){
             throw new RuntimeException("This order does not have any tacos in it.");
         }
+        String customerId = tacoOrderRequest.getCustomerId();
+        if (customerId.isBlank()) { tacoOrderRequest.setCustomerId("Anonymous");}
+
         TacoOrder orderWithTotal = orderCalculator.calculateTacoOrderTotal(tacoOrderRequest);
         orderWithTotal.setCustomerId(tacoOrderRequest.getCustomerId());
 
@@ -31,7 +34,7 @@ public class LocoService {
         return savedOrder;
     }
 
-    public String serviceCheck() {
-        return "Taco service is loco.";
-    }
+    // public List<TacoOrder> getAllOrders() {
+    //     return tacoOrderRepository.findAll();
+    // }
 }

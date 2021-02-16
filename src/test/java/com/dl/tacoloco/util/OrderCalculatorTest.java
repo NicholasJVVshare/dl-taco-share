@@ -24,25 +24,45 @@ public class OrderCalculatorTest {
 
     @Test
     public void orderCalculatorReturnsCorrectTotal() {
-        TacoOrderRequest tacoOrderRequest = this.buildTacoOrderRequest();
-        BigDecimal expectedOrderTotal = new BigDecimal("18.00");
+        TacoOrderRequest tacoOrderRequest = this.buildTacoOrderRequest(threeTacoOrder());
+        BigDecimal expectedOrderTotal = new BigDecimal("8.00");
 
         TacoOrder actualTacoOrder = orderCalculator.calculateTacoOrderTotal(tacoOrderRequest);
         
         assertEquals(expectedOrderTotal, actualTacoOrder.getOrderTotal());
     }
 
-    private TacoOrderRequest buildTacoOrderRequest(){
+    @Test
+    public void orderCalculatorReturnsCorrectDiscountedTotal() {
+        TacoOrderRequest tacoOrderRequest = this.buildTacoOrderRequest(sixTacoOrder());
+        BigDecimal expectedOrderTotal = new BigDecimal("14.40");
+
+        TacoOrder actualTacoOrder = orderCalculator.calculateTacoOrderTotal(tacoOrderRequest);
+        
+        assertEquals(expectedOrderTotal, actualTacoOrder.getOrderTotal());
+    }
+
+    private TacoOrderRequest buildTacoOrderRequest(List<Taco> tacos){
         TacoOrderRequest tacoOrderRequest = new TacoOrderRequest();
-        List<Taco> tacos = Arrays.asList(
-            new Taco("veggie", 2, new BigDecimal(2.5)),
-            new Taco("chicken", 1, new BigDecimal(3)),
-            new Taco("veggie", 1, new BigDecimal(3)),
-            new Taco("chorizo", 2, new BigDecimal(3.5))
-        );
         tacoOrderRequest.setTacos(tacos);
         tacoOrderRequest.setCustomerId(MOCK_CUSTOMER_ID);
 
         return tacoOrderRequest;
+    }
+    
+    private List<Taco> threeTacoOrder() {
+        return Arrays.asList(
+            new Taco("veggie", 2, new BigDecimal(2.5)),
+            new Taco("chicken", 1, new BigDecimal(3))
+        );
+    }
+
+    private List<Taco> sixTacoOrder() {
+        return Arrays.asList(
+            new Taco("veggie", 2, new BigDecimal(2.5)),
+            new Taco("chicken", 1, new BigDecimal(3)),
+            new Taco("beef", 1, new BigDecimal(3)),
+            new Taco("chorizo", 2, new BigDecimal(3.5))
+        );
     }
 }

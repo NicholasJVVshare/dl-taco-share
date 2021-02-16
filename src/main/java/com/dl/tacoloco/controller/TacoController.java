@@ -23,7 +23,7 @@ class TacoController {
 
     @PostMapping(value="/total")
     public ResponseEntity<TacoOrderResponse> calculateOrderTotalPrice(@RequestBody TacoOrderRequest tacoOrderRequest) {
-        System.out.println(tacoOrderRequest.getTacos().toString());
+        System.out.println("Taco Order Request received: " + tacoOrderRequest.getTacos().toString());
 
         TacoOrder tacoOrder = locoService.saveOrder(tacoOrderRequest);
         TacoOrderResponse orderResponse = createResponseFromOrder(tacoOrder);

@@ -20,10 +20,4 @@ class TacoLocoApplicationTests {
 		assertTrue(assertionCondition);
 	}
 
-	@Test
-	void serviceLoads() {
-		System.out.println("Service load test in TacoApp package");
-		assertEquals("Taco service is loco.", locoService.serviceCheck());
-	}
-
 }

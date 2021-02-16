@@ -35,12 +35,6 @@ public class LocoServiceTest {
     private static final String MOCK_CUSTOMER_ID = "El Rey de los Tacos";
 
     @Test
-	public void serviceLoads() {
-        System.out.println("loco service test ran");
-		assertEquals("Taco service is loco.", locoService.serviceCheck());
-	}
-
-    @Test
     public void savesOrderToTacoRepoWithCorrectIds(){
         ArgumentCaptor<TacoOrder> tacoOrderCaptor = ArgumentCaptor.forClass(TacoOrder.class);
         TacoOrderRequest mockTacoOrderRequest = createRequest();
