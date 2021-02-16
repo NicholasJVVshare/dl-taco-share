@@ -36,4 +36,8 @@ public class OrderCalculator {
         return newTacoOrder;
     }
 
+    private BigDecimal applyStandardDiscount(BigDecimal subtotal){
+
+    }
+
 }

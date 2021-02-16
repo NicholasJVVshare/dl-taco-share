@@ -20,6 +20,9 @@ public class LocoService {
     OrderCalculator orderCalculator;
     
     public TacoOrder saveOrder(TacoOrderRequest tacoOrderRequest) {
+        if (tacoOrderRequest.getTacos().isEmpty()){
+            throw new RuntimeException("This order does not have any tacos in it.");
+        }
         TacoOrder orderWithTotal = orderCalculator.calculateTacoOrderTotal(tacoOrderRequest);
         orderWithTotal.setCustomerId(tacoOrderRequest.getCustomerId());
 

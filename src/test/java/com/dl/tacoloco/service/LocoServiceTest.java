@@ -5,8 +5,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
 import java.util.UUID;
 
+import com.dl.tacoloco.dto.Taco;
 import com.dl.tacoloco.dto.TacoOrderRequest;
 import com.dl.tacoloco.entity.TacoOrder;
 import com.dl.tacoloco.repo.TacoOrderRepository;
@@ -78,7 +80,14 @@ public class LocoServiceTest {
     private TacoOrderRequest createRequest() {
         TacoOrderRequest mockTacoOrderRequest = new TacoOrderRequest();
         mockTacoOrderRequest.setCustomerId(MOCK_CUSTOMER_ID);
+        mockTacoOrderRequest.setTacos(Arrays.asList(makeMeOneWithChorizo()));
         return mockTacoOrderRequest;
+    }
+    
+    private Taco makeMeOneWithChorizo(){
+        Taco taco = new Taco();
+        taco.setType("chorizo");
+        return taco;
     }
 
 }

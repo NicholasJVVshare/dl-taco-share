@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class OrderCalculatorTest {
     
     @InjectMocks
-    OrderCalculator orderCalculator;
+    private OrderCalculator orderCalculator;
 
     private final String MOCK_CUSTOMER_ID = "MockCustyId";
 
