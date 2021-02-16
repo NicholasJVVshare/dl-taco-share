@@ -1,5 +1,7 @@
 package com.dl.tacoloco.controller;
 
+import java.util.List;
+
 import com.dl.tacoloco.dto.TacoOrderRequest;
 import com.dl.tacoloco.dto.TacoOrderResponse;
 import com.dl.tacoloco.entity.TacoOrder;
@@ -21,7 +23,7 @@ class TacoController {
     @Autowired
     LocoService locoService;
 
-    @PostMapping(value="/total")
+    @PostMapping(value="/order/total")
     public ResponseEntity<TacoOrderResponse> calculateOrderTotalPrice(@RequestBody TacoOrderRequest tacoOrderRequest) {
         System.out.println("Taco Order Request received: " + tacoOrderRequest.getTacos().toString());
 
@@ -31,9 +33,10 @@ class TacoController {
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
 
-    @GetMapping(value="/tacos")
-    public ResponseEntity<String> getTacos() {
-        return new ResponseEntity<String>("TACOS", HttpStatus.OK);
+    @GetMapping(value="/orders")
+    public ResponseEntity<List<TacoOrder>> getTacos() {
+        List<TacoOrder> allOrders = locoService.getAllOrders();
+        return new ResponseEntity<>(allOrders, HttpStatus.OK);
     }
     
     private TacoOrderResponse createResponseFromOrder(TacoOrder order){

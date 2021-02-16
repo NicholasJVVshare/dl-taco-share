@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import com.dl.tacoloco.dto.*;
 import com.dl.tacoloco.entity.TacoOrder;
 import com.dl.tacoloco.repo.TacoOrderRepository;
@@ -34,7 +36,7 @@ public class LocoService {
         return savedOrder;
     }
 
-    // public List<TacoOrder> getAllOrders() {
-    //     return tacoOrderRepository.findAll();
-    // }
+    public List<TacoOrder> getAllOrders() {
+        return tacoOrderRepository.findAll();
+    }
 }
